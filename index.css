@@ -1,0 +1,40 @@
+body {
+  background: #f9f9f9;
+  color: rgb(45, 45, 45);
+  padding: 10px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 500;
+}
+
+#left {
+  float: left;
+  width: 100px;
+}
+
+#right {
+  float: right;
+  width: 100px;
+}
+
+.main {
+  display: inline-block;
+  width: 75%;
+  text-align: left;
+}
+
+.twiddle-list {
+  display: inline;
+  padding: 10px;
+  
+}
+
+#twiddle {
+  color: #6886c5;
+  list-style-type: none;
+  background: #ffacb746;
+  border: solid;
+  border-color: #6886c5;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 1em;
+}

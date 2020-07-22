@@ -6,10 +6,20 @@
 
     <title>Twiddler!</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <script src="data-generator.js"></script>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css" type="text/css" />
+
   </head>
-  <body>
+  <body> 
+    <div class='main' id='top'>
+      <form id='twid-form'>
+        <input id='twid' type='text' placeholder="twiddle it">
+        <button type='submit' form='twid-form' id='submit'>Twid it</button>
+      </form>
+    </div>
+    
   </body>
 </html>
