@@ -22,8 +22,6 @@ $(document).ready(() => {
 
   console.log('stream', streams)
   console.log('home', streams.home);
-  // console.log('user', streams.users)
-
 
 
 
@@ -32,19 +30,21 @@ $(document).ready(() => {
 //                    first to fill the page                             //
 ///////////////////////////////////////////////////////////////////////////
 
+(function getTweets() {
   const $tweets = streams.home.map((tweet) => {
     const $tweet = $(document.createElement('div'))
-      .addClass('tweet');
+      .addClass('tweet')
     // const text = `@${tweet.user}: ${tweet.message}`;
-
 
     // create a user that is a clickable element appended to the div of tweet
     const $user = $(document.createElement('a'))
       .attr('class', 'user')
       .attr('href', '#')
       .attr('id', 'user')
+      .attr('data-user', tweet.user)
+      .attr('data-time', tweet.created_at)
       .text(`@${tweet.user}`);
-
+    console.dir($user)
     const $message = $(document.createElement('div'))
       .attr('class', 'message')
       .text(tweet.message);
@@ -52,6 +52,7 @@ $(document).ready(() => {
   
     const $time = $(document.createElement('div'))
       .attr('class', 'time')
+      .attr('data-time', tweet.created_at)
       .addClass('time')
       .text(`${moment(tweet.created_at).fromNow()} on ${moment(tweet.created_at).format('LL')}`)
 
@@ -59,10 +60,15 @@ $(document).ready(() => {
 
     return $tweet;
   });
-  $mainDiv.append($tweets);
+  return $mainDiv.append($tweets);
+})();
+
+  $('.main').on('click', '#user', function() {
+    
+  })
 
 
-  
+
 ////////////////////////////////////////////////////////////////////////////
 //                generate random tweets from time                        //
 ////////////////////////////////////////////////////////////////////////////
@@ -96,7 +102,6 @@ $(document).ready(() => {
 ////////////////////////////////////////////////////////////////////////////
 //                   generate random tweets with click                    //
 ///////////////////////////////////////////////////////////////////////////
-
 
 
 
