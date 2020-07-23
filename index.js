@@ -1,3 +1,4 @@
+// const moment = require("moment");
 
 $(document).ready(() => {
   const $body = $('body');
@@ -6,18 +7,34 @@ $(document).ready(() => {
 
   console.log('stream', streams)
   console.log('home', streams.home);
-  console.log('user', streams.users)
+  // console.log('user', streams.users)
+
 
   //////////////        first to fill the page        ///////////////
 
   const $tweets = streams.home.map((tweet) => {
     const $tweet = $(document.createElement('div'))
       .addClass('tweet');
-    const text = `@${tweet.user}: ${tweet.message}`;
-    const user = `@${tweet.user}`;
-    const message = `${tweet.message}`
+    // const text = `@${tweet.user}: ${tweet.message}`;
 
-    $tweet.text(text);
+
+    // create a user that is a clickable element appended to the div of tweet
+    const $user = $(document.createElement('a'))
+      .attr('class', 'user')
+      .attr('href', '#')
+      .append(`@${tweet.user}`);
+
+    const $message = $(document.createElement('div'))
+      .attr('class', 'message')
+      .append(tweet.message);
+
+  
+    const $time = $(document.createElement('div'))
+      .attr('class', 'time')
+      .addClass('time')
+      .append(`${moment(tweet.created_at).fromNow()} on ${moment(tweet.created_at).format('LL')}`)
+
+    $tweet.append($user, $message, $time);
     return $tweet;
   });
   $mainDiv.append($tweets);
@@ -27,16 +44,45 @@ $(document).ready(() => {
 
 
 
-    $('#get-new-tweet').on('click', function() {
-      
+  $('#get-new-tweet').on('click', function() {
+    const lastTweet = streams.home[streams.home.length - 1];
 
-      const $newTweet = $(document.createElement('div'))
-        .addClass('tweet')
-        .text(streams.home[streams.home.length - 1]);
+    const $newTweet = $(document.createElement('div'))
+      .addClass('tweet')
+      .prependTo($('.new-tweet'))
 
-        
-    })
+    const $user = $(document.createElement('a'))
+      .attr('class', 'user')
+      .attr('href', '#')
+      .append(`@${lastTweet.user}`);
 
+    const $message = $(document.createElement('div'))
+      .attr('class', 'message')
+      .append(lastTweet.message);
+    
+    const $time = $(document.createElement('div'))
+      .attr('class', 'time')
+      .addClass('time')
+      .append(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
+
+    if (lastTweet) {
+      $newTweet.append($user, $message, $time)
+    } 
+  })
+
+///////////////         update time                   //////////////
+
+// function updateTime() {
+//   streams.home.forEach(function(user) {
+//     let curTime = moment(users.created_at).format('HH:mm:ss a');
+//     ($mainDiv).html('current tweet' + curTime)
+//   })
+// }
+
+// updateTime();
+// setInterval(function() {
+//   updateTime();
+// }, 1000)
   
     // setTimeout(function (){
     //   $(document.createElement('a'))
