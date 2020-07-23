@@ -30,38 +30,61 @@ $(document).ready(() => {
 //                    first to fill the page                             //
 ///////////////////////////////////////////////////////////////////////////
 
+
 (function getTweets() {
   const $tweets = streams.home.map((tweet) => {
     const $tweet = $(document.createElement('div'))
       .addClass('tweet')
-    // const text = `@${tweet.user}: ${tweet.message}`;
-
-    // create a user that is a clickable element appended to the div of tweet
-    const $user = $(document.createElement('a'))
-      .attr('class', 'user')
-      .attr('href', '#')
       .attr('id', tweet.user)
-      .attr('data-user', tweet.user)
-      .attr('data-time', tweet.created_at)
-      .text(`@${tweet.user}`);
-    console.dir($user)
+      .attr('data-date', tweet.created_at);
+    const time = moment(tweet.created_at, 'ddd mmm dd yyyy HH:MM:ss').fromNow(true);
+    const $user = $(document.createElement('a'))
+      .addClass('user')
+      .attr('href', '#')
+      .text(`@${tweet.user}`)
     const $message = $(document.createElement('div'))
-      .attr('class', 'message')
+      .addClass('message')
       .text(tweet.message);
+    const $time = $(document.createElement('div'))
+      .addClass('time')
+      .text(time)
+    $tweet.append($user, $message, $time);
+    $tweet.appendTo($('.main'));
+  });
+})();
+
+
+
+// function getTweets() {
+//   const $tweets = streams.home.map((tweet) => {
+//     const $tweet = $(document.createElement('div'))
+//       .addClass('tweet')
+//     // const text = `@${tweet.user}: ${tweet.message}`;
+
+//     // create a user that is a clickable element appended to the div of tweet
+//     const $user = $(document.createElement('a'))
+//       .attr('class', 'user')
+//       .attr('href', '#')
+//       .attr('id', tweet.user)
+//       .text(`@${tweet.user}`);
+//     console.dir($user)
+//     const $message = $(document.createElement('div'))
+//       .attr('class', 'message')
+//       .text(tweet.message);
     
   
-    const $time = $(document.createElement('div'))
-      .attr('class', 'time')
-      .attr('data-time', tweet.created_at)
-      .addClass('time')
-      .text(`${moment(tweet.created_at).fromNow()} on ${moment(tweet.created_at).format('LL')}`)
+//     const $time = $(document.createElement('div'))
+//       .attr('class', 'time')
+//       .attr('data-time', tweet.created_at)
+//       .addClass('time')
+//       .text(`${moment(tweet.created_at).fromNow()} on ${moment(tweet.created_at).format('LL')}`)
 
-    $tweet.append($user, $message, $time);
+//     $tweet.append($user, $message, $time);
 
-    return $tweet;
-  });
-  return $mainDiv.append($tweets);
-})();
+//     return $tweet;
+//   });
+//   return $mainDiv.append($tweets);
+// };
 
 console.log(streams.users.mracus);
 
