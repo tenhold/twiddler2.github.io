@@ -40,7 +40,7 @@ $(document).ready(() => {
     const $user = $(document.createElement('a'))
       .attr('class', 'user')
       .attr('href', '#')
-      .attr('id', 'user')
+      .attr('id', tweet.user)
       .attr('data-user', tweet.user)
       .attr('data-time', tweet.created_at)
       .text(`@${tweet.user}`);
@@ -63,9 +63,30 @@ $(document).ready(() => {
   return $mainDiv.append($tweets);
 })();
 
+console.log(streams.users.mracus);
+
   $('.main').on('click', '#user', function() {
+    $('.popup-overlay, .popup-content').addClass('active');
+    const name = $(this).data('user');
+    console.log(name)
+    console.log(streams.users[name])
     
+    return false;
   })
+
+  
+
+
+    // streams.home.filter((user) => {
+    //   const name = $(this).data('user');
+    //   console.log($('#user  '))
+    //   if (name === $('#user')) {
+    //     $('#user').show();
+    //     console.log(this)
+
+    //   }
+    // })
+  // })
 
 
 
@@ -105,31 +126,31 @@ $(document).ready(() => {
 
 
 
-  $('#get-new-tweet').on('click', function() {
-    const lastTweet = streams.home[streams.home.length - 1];
+  // $('#get-new-tweet').on('click', function() {
+  //   const lastTweet = streams.home[streams.home.length - 1];
 
-    const $newTweet = $(document.createElement('div'))
-      .addClass('tweet')
-      .prependTo($('.new-tweet'))
+  //   const $newTweet = $(document.createElement('div'))
+  //     .addClass('tweet')
+  //     .prependTo($('.new-tweet'))
 
-    const $user = $(document.createElement('a'))
-      .attr('class', 'user')
-      .attr('href', '#')
-      .append(`@${lastTweet.user}`);
+  //   const $user = $(document.createElement('a'))
+  //     .attr('class', 'user')
+  //     .attr('href', '#')
+  //     .append(`@${lastTweet.user}`);
 
-    const $message = $(document.createElement('div'))
-      .attr('class', 'message')
-      .append(lastTweet.message);
+  //   const $message = $(document.createElement('div'))
+  //     .attr('class', 'message')
+  //     .append(lastTweet.message);
     
-    const $time = $(document.createElement('div'))
-      .attr('class', 'time')
-      .addClass('time')
-      .append(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
+  //   const $time = $(document.createElement('div'))
+  //     .attr('class', 'time')
+  //     .addClass('time')
+  //     .append(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
 
-    if (lastTweet) {
-      $newTweet.append($user, $message, $time)
-    } 
-  })
+  //   if (lastTweet) {
+  //     $newTweet.append($user, $message, $time)
+  //   } 
+  // })
 
 
 
