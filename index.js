@@ -26,6 +26,8 @@ $(document).ready(() => {
 
 
 
+
+
 ////////////////////////////////////////////////////////////////////////////
 //                    first to fill the page                             //
 ///////////////////////////////////////////////////////////////////////////
@@ -40,12 +42,13 @@ $(document).ready(() => {
     const $user = $(document.createElement('a'))
       .attr('class', 'user')
       .attr('href', '#')
+      .attr('id', 'user')
       .text(`@${tweet.user}`);
 
     const $message = $(document.createElement('div'))
       .attr('class', 'message')
       .text(tweet.message);
-
+    
   
     const $time = $(document.createElement('div'))
       .attr('class', 'time')
@@ -54,44 +57,41 @@ $(document).ready(() => {
 
     $tweet.append($user, $message, $time);
 
-
     return $tweet;
   });
   $mainDiv.append($tweets);
 
+
+  
 ////////////////////////////////////////////////////////////////////////////
 //                generate random tweets from time                        //
 ////////////////////////////////////////////////////////////////////////////
   
 
-    setInterval(function() {
-      const lastTweet = streams.home[streams.home.length - 1];
-      const $newTweet = $(document.createElement('div'))
-        .addClass('tweet')
-        .prependTo($('.new-tweet'))
+    // setInterval(function() {
+    //   const lastTweet = streams.home[streams.home.length - 1];
+    //   const $newTweet = $(document.createElement('div'))
+    //     .addClass('tweet')
+    //     .prependTo($('.new-tweet'))
   
-      const $user = $(document.createElement('a'))
-        .attr('class', 'user')
-        .attr('href', '#')
-        .text(`@${lastTweet.user}`);
+    //   const $user = $(document.createElement('a'))
+    //     .attr('class', 'user')
+    //     .attr('href', '#')
+    //     .text(`@${lastTweet.user}`);
   
-      const $message = $(document.createElement('div'))
-        .attr('class', 'message')
-        .text(lastTweet.message);
+    //   const $message = $(document.createElement('div'))
+    //     .attr('class', 'message')
+    //     .text(lastTweet.message);
       
-      const $time = $(document.createElement('div'))
-        .attr('class', 'time')
-        .addClass('time')
-        .text(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
+    //   const $time = $(document.createElement('div'))
+    //     .attr('class', 'time')
+    //     .addClass('time')
+    //     .text(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
   
-        $newTweet.append($user, $message, $time)
+    //     $newTweet.append($user, $message, $time)
   
-    }, Math.random() * 30000)();
+    // }, Math.random() * 30000)();
 
-
-  function updateTweetDates() {
-  $()
-  }
   
 ////////////////////////////////////////////////////////////////////////////
 //                   generate random tweets with click                    //
@@ -99,31 +99,32 @@ $(document).ready(() => {
 
 
 
-  // $('#get-new-tweet').on('click', function() {
-  //   const lastTweet = streams.home[streams.home.length - 1];
 
-  //   const $newTweet = $(document.createElement('div'))
-  //     .addClass('tweet')
-  //     .prependTo($('.new-tweet'))
+  $('#get-new-tweet').on('click', function() {
+    const lastTweet = streams.home[streams.home.length - 1];
 
-  //   const $user = $(document.createElement('a'))
-  //     .attr('class', 'user')
-  //     .attr('href', '#')
-  //     .append(`@${lastTweet.user}`);
+    const $newTweet = $(document.createElement('div'))
+      .addClass('tweet')
+      .prependTo($('.new-tweet'))
 
-  //   const $message = $(document.createElement('div'))
-  //     .attr('class', 'message')
-  //     .append(lastTweet.message);
+    const $user = $(document.createElement('a'))
+      .attr('class', 'user')
+      .attr('href', '#')
+      .append(`@${lastTweet.user}`);
+
+    const $message = $(document.createElement('div'))
+      .attr('class', 'message')
+      .append(lastTweet.message);
     
-  //   const $time = $(document.createElement('div'))
-  //     .attr('class', 'time')
-  //     .addClass('time')
-  //     .append(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
+    const $time = $(document.createElement('div'))
+      .attr('class', 'time')
+      .addClass('time')
+      .append(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
 
-  //   if (lastTweet) {
-  //     $newTweet.append($user, $message, $time)
-  //   } 
-  // })
+    if (lastTweet) {
+      $newTweet.append($user, $message, $time)
+    } 
+  })
 
 
 
