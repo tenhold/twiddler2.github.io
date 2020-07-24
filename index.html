@@ -17,23 +17,23 @@
   <body> 
     <div class='header'>
       <h1>Twiddler</h1>
+
     </div>
     <div class='container'>
       <div class=left>
         <p>                 </p>
-
       </div> 
       <div class=center>
           <div class='buttons'>
           <form id='twit-form'>
+            <button type='button' form='to-home' style='display:none' href='#main' class='button' id='to-home'>To Home</button> </br>
             <input id='twit' type='text' placeholder="twiddle it">
             <button type='submit' form='twid-form' class='button'>Twid it</button>
-            <button type='button' form='new-tweet' class='button' id='get-new-tweet'>get that new</button>
+            <button type='button' form='new-tweet' class='button' id='get-new-tweet'>get new</button>
 
           </form>
         </div>
         
-        <a id='to-home' href='.main'style='display:none'>To Home</a>
         <div id='home'>
           <div class='main' id='main'>
             <!-- Storage for tweets -->
@@ -43,19 +43,19 @@
         <div class='popup'>
           <span class='popuptext' id='myPopup'>&times;</span>
         </div>  
-
+<!-- 
           <div id='simpleModal' class='modal'>
             <div class='modal-content'>
               <span class='closeBtn'>&times;</span>
               <p>Hello... I'm a modal</p>
             </div>
-          </div>
+          </div> -->
 
       </div>
 
       <div class='right'>
         <p>              </p>
-      </div
+      </div>
 
     </div>
 

@@ -25,14 +25,13 @@ $(document).ready(() => {
   console.log('home', streams.home);
 
 
+const $homeBtn = $('#to-home');
 
 
 ////////////////////////////////////////////////////////////////////////////
 //                    first to fill the page                             //
 ///////////////////////////////////////////////////////////////////////////
 
-
-// let twitCount = 0;
 
 getTweets();
 
@@ -94,46 +93,51 @@ $('#get-new-tweet').on('click', function() {
 //                   pop-up to filter each user                          //
 ///////////////////////////////////////////////////////////////////////////
 
-
-function filterTweets(user) {
-  if(user) {
-    $('.tweet').show();
-  } else {
-    $('.tweet').hide();
-    // $('.tweet').filter(user[0].innerHTML.slice(1)).show();
-  } 
-  $('#home').show();
-}
-
-
-
-
+// build a filter function that finds tweets
 
 
 $('body').on('click', '.user', function() {
   // store the current name that is clicked
   // const $clickedName = $(this)[0].dataset.user;
-  // const $clickedName = $(this).data('user');
-
-  var curUser = $(this).data("user"); //"this" refers to <a> selector, data(key): get data named "value"
-  $body.html(''); //html('')is used to set an element's content, any content that was in that element is completely replaced by the new content.
-  var $twiddUser = $(`<header><h1>Twiddler - ${curUser}</h1></header>`).addClass('tweet');
-  $twiddUser.appendTo($body);
-  var $home = $('<div class="home"><a href="index.html">Main Page</a></div>').addClass('twit-form');
-  $home.appendTo($body);
+  const $clickedName = $(this).data('user');
   
-  const arrOfCurUser = streams.users[curUser].map((tweet, i) => {
-    console.log($clickedName)
+  const $filteredTweets = $('.tweet').filter((i, tweet) => {
+    const $userName = $(tweet)[0].id;
+    if ($userName !== $clickedName) {
+      return tweet;
+    }
+  });
+  
+  $filteredTweets.hide();
+  $homeBtn.show();
 
-
-
-
-
-
-
-
-
+  $homeBtn.on('click', function() {
+    $filteredTweets.show();
+    return false;
   })
+  
+  return false;
+});
+
+
+
+
+//   // getting the array of the tweets of the clicked name
+//   const arrOfClickedName = streams.users[$clickedName]
+
+//   console.log(arrOfClickedName)
+//   arrOfClickedName.forEach(function(tweet) {
+
+//   })  
+ 
+
+
+//   let user = $(this).closest('.tweet').data('user');
+//   // $('.main').hide();
+//   // filterTweets(user);
+//   return false;
+// });
+
 
   // var userIndex = streams.users[curUser].length - 1;
   // while (userIndex >= 0) {
@@ -151,32 +155,7 @@ $('body').on('click', '.user', function() {
   //   $user.prependTo($main);
   //   userIndex -= 1;
   //   }
-  });
-
-
-
-
-
-
-
-
-
-
-  // // getting the array of the tweets of the clicked name
-  // const arrOfClickedName = streams.users[$clickedName]
-
-  // console.log(arrOfClickedName)
-  // arrOfClickedName.forEach(function(tweet) {
-
-  // })  
- 
-
-
-  // let user = $(this).closest('.tweet').data('user');
-  // // $('.main').hide();
-  // // filterTweets(user);
-//   return false;
-// })
+  // });
 
 
 
@@ -188,7 +167,9 @@ $('body').on('click', '.user', function() {
 
 
 
-
+//****************************************************************//
+//****************************************************************//
+//****************************************************************//
 
 // // get modal element
 
@@ -209,8 +190,12 @@ $('body').on('click', '.user', function() {
 
 // for (let i = 0; i < modalBtn.length; i++) {
 //   modalBtn[i].addEventListener('click', function() {
-//     const name = $(this).data('user');
-//     $('.modal').dialog('option',)
+//     const $clickedName = $(this)[0].dataset.user;
+//     console.log($clickedName)
+
+//     $(this).css('color', 'red')
+
+//     // $('.modal').dialog('option',)
     
     
     
@@ -246,6 +231,9 @@ $('body').on('click', '.user', function() {
 //   }
 // }
 
+//****************************************************************//
+//****************************************************************//
+//****************************************************************//
 
 
 
