@@ -31,7 +31,11 @@ $(document).ready(() => {
 ///////////////////////////////////////////////////////////////////////////
 
 
-(function getTweets() {
+// let twitCount = 0;
+
+getTweets();
+
+function getTweets() {
   const $tweets = streams.home.map((tweet) => {
     const $tweet = $(document.createElement('div'))
       .addClass('tweet')
@@ -49,47 +53,22 @@ $(document).ready(() => {
       .addClass('time')
       .text(time)
     $tweet.append($user, $message, $time);
-    $tweet.appendTo($('.main'));
+    $tweet.insertAfter($('.main'));
+    return $tweet;
   });
-})();
+  twitCount = streams.home.length;
+  return $tweets
+};
 
 
 
-// function getTweets() {
-//   const $tweets = streams.home.map((tweet) => {
-//     const $tweet = $(document.createElement('div'))
-//       .addClass('tweet')
-//     // const text = `@${tweet.user}: ${tweet.message}`;
-
-//     // create a user that is a clickable element appended to the div of tweet
-//     const $user = $(document.createElement('a'))
-//       .attr('class', 'user')
-//       .attr('href', '#')
-//       .attr('id', tweet.user)
-//       .text(`@${tweet.user}`);
-//     console.dir($user)
-//     const $message = $(document.createElement('div'))
-//       .attr('class', 'message')
-//       .text(tweet.message);
-    
-  
-//     const $time = $(document.createElement('div'))
-//       .attr('class', 'time')
-//       .attr('data-time', tweet.created_at)
-//       .addClass('time')
-//       .text(`${moment(tweet.created_at).fromNow()} on ${moment(tweet.created_at).format('LL')}`)
-
-//     $tweet.append($user, $message, $time);
-
-//     return $tweet;
-//   });
-//   return $mainDiv.append($tweets);
-// };
+////////////////////////////////////////////////////////////////////////////
+//                   pop-up to filter each user                          //
+///////////////////////////////////////////////////////////////////////////
 
 console.log(streams.users.mracus);
 
   $('.main').on('click', '#user', function() {
-    $('.popup-overlay, .popup-content').addClass('active');
     const name = $(this).data('user');
     console.log(name)
     console.log(streams.users[name])
@@ -147,32 +126,15 @@ console.log(streams.users.mracus);
 //                   generate random tweets with click                    //
 ///////////////////////////////////////////////////////////////////////////
 
+  $('#get-new-tweet').on('click', function() {     
+    getTweets();
+  })
 
 
   // $('#get-new-tweet').on('click', function() {
-  //   const lastTweet = streams.home[streams.home.length - 1];
-
-  //   const $newTweet = $(document.createElement('div'))
-  //     .addClass('tweet')
-  //     .prependTo($('.new-tweet'))
-
-  //   const $user = $(document.createElement('a'))
-  //     .attr('class', 'user')
-  //     .attr('href', '#')
-  //     .append(`@${lastTweet.user}`);
-
-  //   const $message = $(document.createElement('div'))
-  //     .attr('class', 'message')
-  //     .append(lastTweet.message);
-    
-  //   const $time = $(document.createElement('div'))
-  //     .attr('class', 'time')
-  //     .addClass('time')
-  //     .append(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
-
-  //   if (lastTweet) {
-  //     $newTweet.append($user, $message, $time)
-  //   } 
+  //   if (streams.home.length > twitCount) {
+  //     console.log($tweets)
+  //   }
   // })
 
 
@@ -182,23 +144,23 @@ console.log(streams.users.mracus);
 ////////////////////////////////////////////////////////////////////
 
 
-  $('#twid').on('click', function() {
-      console.log($(this))
-    let tweetInput = $(this).siblings('input');
-    tweet = tweetInput.val()
-    if (tweet.length) {
-      tweetHtml = makeTweet({
-        userId: 4,
-        userName: 'Jon Tenholder',
-        tweet: tweet
-      })
-    }
+  // $('#twid').on('click', function() {
+  //     console.log($(this))
+  //   let tweetInput = $(this).siblings('input');
+  //   tweet = tweetInput.val()
+  //   if (tweet.length) {
+  //     tweetHtml = makeTweet({
+  //       userId: 4,
+  //       userName: 'Jon Tenholder',
+  //       tweet: tweet
+  //     })
+  //   }
 
-    tweetInput.val('')
+  //   tweetInput.val('')
     
 
-    return false;
-  })
+  //   return false;
+  // })
 
 
 
