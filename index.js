@@ -44,7 +44,9 @@ function getTweets() {
     const time = moment(tweet.created_at, 'ddd mmm dd yyyy HH:MM:ss').fromNow(true);
     const $user = $(document.createElement('a'))
       .addClass('user')
+      .attr('id', 'user')
       .attr('href', '#')
+      .attr('data-user', tweet.user)
       .text(`@${tweet.user}`)
     const $message = $(document.createElement('div'))
       .addClass('message')
@@ -53,7 +55,7 @@ function getTweets() {
       .addClass('time')
       .text(time)
     $tweet.append($user, $message, $time);
-    $tweet.insertAfter($('.main'));
+    $tweet.prependTo($('.main'));
     return $tweet;
   });
   twitCount = streams.home.length;
@@ -66,30 +68,137 @@ function getTweets() {
 //                   pop-up to filter each user                          //
 ///////////////////////////////////////////////////////////////////////////
 
-console.log(streams.users.mracus);
 
-  $('.main').on('click', '#user', function() {
-    const name = $(this).data('user');
-    console.log(name)
-    console.log(streams.users[name])
-    
-    return false;
-  })
+// get modal element
 
-  
+const modal = document.getElementById('simpleModal');
+
+// get open modal button
+
+// const modalBtn = document.getElementById('modalBtn');
+
+const modalBtn = document.getElementsByClassName('user');
 
 
-    // streams.home.filter((user) => {
-    //   const name = $(this).data('user');
-    //   console.log($('#user  '))
-    //   if (name === $('#user')) {
-    //     $('#user').show();
-    //     console.log(this)
 
-    //   }
-    // })
+// close btn
+
+const closeBtn = document.getElementsByClassName('closeBtn')[0];
+
+// listen for click
+
+for (let i = 0; i < modalBtn.length; i++) {
+  modalBtn[i].addEventListener('click', openModal);
+}
+
+// listen for close click
+
+closeBtn.addEventListener('click', closeModal);
+
+// listen for outside click
+
+window.addEventListener('click', clickOutside);
+
+// function to open modal
+
+
+function openModal() {
+  modal.style.display = 'block'
+}
+
+// function to close modal
+
+function closeModal() {
+  modal.style.display = 'none';
+}
+
+// function to close modal
+
+function clickOutside(e) {
+  if(e.target === modal) {
+    modal.style.display = 'none';
+  }
+}
+
+
+
+
+
+  // const openModalButtons = document.querySelectorAll('[data-modal-target]')
+
+  // const openModalButtons = document.getElementsByClassName('user')
+  // const closeModalButtons = document.querySelectorAll('[data-close-button]')
+  // const overlay = document.getElementById('overlay');
+
+  // openModalButtons.forEach(button => {
+  //   button.addEventListener('click', () => {
+  //     const modal = document.querySelector(button.dataset.modalTarget)
+  //     openModal(modal)
+  //   })
   // })
 
+
+  // closeModalButtons.forEach(button => { 
+  //   button.addEventListener('click', () => {
+  //     const modal = button.closest('.modal');
+  //     closeModal(modal)
+  //   })
+  // })
+
+  // function openModal(modal) {
+  //   if(modal === null) return;
+  //   modal.classList.add('active')
+  //   overlay.classList.add('active')
+  // }
+
+
+  // function closeModal(modal) {
+  //   if(modal === null) return
+  //   modal.classList.remove('active')
+  //   overlay.classList.remove('active')
+  // }
+
+
+
+  // function filterUsers(user) {
+  //   if (user === 'main') {
+  //     $('.tweet').show();
+  //   } else {
+  //     $('.tweet').hide();
+  //     $('.tweet').filter(`[data-user="${user}"]`).show();
+  //   }
+  //   $('')
+  // }
+
+  // $('#to-home').on('click', function() {
+  //   $('.main').hide();
+  //   displayTweets();
+  // })
+
+  // $('.tweet').on('click', '.user', function() {
+  //   const name = $(this).data('user');
+  //   $('.main').hide();
+  //   filterUsers(name)
+  // })
+
+
+
+
+  // $('.tweet').on('click', '.user', function() {
+  //   // let popup = $(document.getElementById('popup'));
+  //   // popup.toggle('show');
+  //   const name = $(this).data('user');
+  //   console.log(streams.users)
+  //   for (let key in streams.users) {
+  //     if (name !== streams.users[key]) {
+  //       console.log(streams.users[key])
+  //     }
+  //   }
+    
+  //   return false;
+  // })
+
+  
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -97,46 +206,17 @@ console.log(streams.users.mracus);
 ////////////////////////////////////////////////////////////////////////////
   
 
-    // setInterval(function() {
-    //   const lastTweet = streams.home[streams.home.length - 1];
-    //   const $newTweet = $(document.createElement('div'))
-    //     .addClass('tweet')
-    //     .prependTo($('.new-tweet'))
-  
-    //   const $user = $(document.createElement('a'))
-    //     .attr('class', 'user')
-    //     .attr('href', '#')
-    //     .text(`@${lastTweet.user}`);
-  
-    //   const $message = $(document.createElement('div'))
-    //     .attr('class', 'message')
-    //     .text(lastTweet.message);
-      
-    //   const $time = $(document.createElement('div'))
-    //     .attr('class', 'time')
-    //     .addClass('time')
-    //     .text(`${moment(lastTweet.created_at).fromNow()} on ${moment(lastTweet.created_at, 'YY-MM-DD hh:mm:ss a').format('LLL')}`)
-  
-    //     $newTweet.append($user, $message, $time)
-  
-    // }, Math.random() * 30000)();
 
   
 ////////////////////////////////////////////////////////////////////////////
 //                   generate random tweets with click                    //
 ///////////////////////////////////////////////////////////////////////////
 
-  $('#get-new-tweet').on('click', function() {     
+  $('#get-new-tweet').on('click', function() {    
+    console.log(modalBtn)
+ 
     getTweets();
   })
-
-
-  // $('#get-new-tweet').on('click', function() {
-  //   if (streams.home.length > twitCount) {
-  //     console.log($tweets)
-  //   }
-  // })
-
 
 
 /////////////////////////////////////////////////////////////////////
@@ -144,25 +224,23 @@ console.log(streams.users.mracus);
 ////////////////////////////////////////////////////////////////////
 
 
-  // $('#twid').on('click', function() {
-  //     console.log($(this))
-  //   let tweetInput = $(this).siblings('input');
-  //   tweet = tweetInput.val()
-  //   if (tweet.length) {
-  //     tweetHtml = makeTweet({
-  //       userId: 4,
-  //       userName: 'Jon Tenholder',
-  //       tweet: tweet
-  //     })
-  //   }
+  $('#twit-it').on('click', function() {
+      console.log($(this))
+    // let tweetInput = $(this).siblings('input');
+    // tweet = tweetInput.val()
+    // if (tweet.length) {
+    //   tweetHtml = makeTweet({
+    //     userId: 4,
+    //     userName: 'Jon Tenholder',
+    //     tweet: tweet
+    //   })
+    // }
 
-  //   tweetInput.val('')
+    // tweetInput.val('')
     
 
-  //   return false;
-  // })
-
-
+    return false;
+  })
 
 
 
@@ -198,171 +276,3 @@ console.log(streams.users.mracus);
    
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $(document).ready(() => {
-//   // const $body = $('body');
-//   // $body.html('');
-
-
-// ///////////          Creating a main list in the body           ///////////
-
-
-// // put the tweets in a div 
-  
-
-//   const $mainDiv = $('<div></div>')
-//     .attr('class', 'main')
-//     .attr('id', 'main')
-//     .appendTo($('#top'));
-  
-
-
-
-// ///////////           Populating the last with twidders         ///////////
-  
-// console.log('streams', streams)
-// console.log('home', streams.home)
-
-// const $tweets = streams.home.map((tweet) => {
-//     const $tweet = $('<div></div>')
-//       .attr('class', 'tweet')
-//       .addClass('tweet');
-//     const $user = $('<a>')
-//       .attr('class', 'user')
-//       .append(tweet.user);
-//     const $message = $('<p></p>')
-//       .attr('class', 'message')
-//       .append(tweet.message);
-    
-
-//     let fromNow = moment().startOf(tweet.created_at).fromNow();
- 
-//     const text = `@${tweet.user}: ${tweet.message} at ${fromNow}`;
-
-//     $mainDiv.append($tweet)
-
-//     $tweet.append($user, $message);
-//     $tweet.text(text)
-//     return $tweet;
-//   });
-
-//   $mainDiv.append($tweets);
-
-//   console.log($tweets)
-
-
-//   // const $tweets = streams.home.map((tweet) => {
-//   //   const $tweet = $('<div></div>')
-//   //     .attr('class', 'tweet')
-//   //     .addClass('tweet');
-//   //   const $user = $('<a>')
-//   //     .attr('class', 'user')
-//   //     .append(tweet.user);
-//   //   const $message = $('<p></p>')
-//   //     .attr('class', 'message')
-//   //     .append(tweet.message);
-
-//   //   let fromNow = moment().startOf(tweet.created_at).fromNow();
- 
-//   //   const text = `@${tweet.user}: ${tweet.message} at ${fromNow}`;
-
-//   //   $mainDiv.append($tweet)
-
-//   //   $tweet.append($user, $message);
-//   //   $tweet.text(text)
-//   //   return $tweet;
-//   // });
-
-//   // $mainDiv.append($tweets);
-
-
-//   ///////////        Add to list                             ///////////
-
-
-
-//         // Continually run to update count of new, not displayed, tweets
-//         (function updateTweetCount(){
-//           if(streams.home.offset > 0){
-//             var newTweetsCount = 0;
-//             if(location.hash && location.hash.substr(1) !== 'timeline'){
-//               var user = location.hash.substr(1);
-//               newTweetsCount = streams.users[user].length - 
-//                 $('.tweet').filter('[data-user="' + user + '"]').length;
-//             }else{
-//               newTweetsCount = streams.home.length - streams.home.offset;
-//             }
-//             if(newTweetsCount > 0){
-//               $('#newtweets-count').text(newTweetsCount);
-//               $('#timeline-newtweets').slideDown(300);
-//             }
-//           }
-//           setTimeout(updateTweetCount, 5000);
-//         })();
-
-//   // $('text').keyup(function(e) {
-//   //   let code = e.which;
-//   //   if (code === 13) {
-//   //     e.preventDefault();
-//   //     $twiddleList.append(`<li> ${e.target.value}</li>`)
-//   //   }
-//   // })
-
-
-
-//   // const inpTwid = document.getElementById($('#text'));
-
-//   // const btn = document.getElementById($('#submit'));
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-// });
-
-
-
-
-// //   const $tweets = streams.home.map((tweet) => {
-// //     const $tweet = $('<div></div>');
-// //     const text = `@${tweet.user}: ${tweet.message}`;
-
-// //     $tweet.text(text);
-// //     // console.log('users', users);
-// //     // console.log('streams', streams.home);
-// //     // console.log('home', streams.home);
-// //     return $tweet;
-// //   });
-// //   $body.append($tweets);
-
-// // });

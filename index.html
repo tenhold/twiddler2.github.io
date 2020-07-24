@@ -18,21 +18,37 @@
       <h1>Twiddler</h1>
       <button type='button' form='new-tweet' id='get-new-tweet'>get that new</button>
     </header>
-    <div class='twid-form'>
-      <form id='twid-form'>
-        <input id='twid' type='text' placeholder="twiddle it">
-        <button type='submit' form='twid-form' id='get-new-tweet'>Twid it</button>
+    <div class='twit-form'>
+      <form id='twit-form'>
+        <input id='twit' type='text' placeholder="twiddle it">
+        <button type='submit' form='twid-form' id='twit-it'>Twid it</button>
       </form>
     </div>
-    <div class='my-tweet'></div>
+    <div id='to-home' href='.main'style='display:none'>To Home
+    
+    </div>
+    <div class='my-tweet'>
     <!-- Storage for when the user tweets -->
-    <div class='new-tweet'>
-      <!-- New Tweets will go here -->
     </div>
     <div class='main' id='main'>
       <!-- Storage for tweets -->
     </div>
+    
+    <div class='popup'>
+      <span class='popuptext' id='myPopup'>&times;</span>
+    </div>
+
   
+
+    <button id='modalBtn' class='button'>Click here</button>
+
+    <div id='simpleModal' class='modal'>
+      <div class='modal-content'>
+        <span class='closeBtn'>&times;</span>
+        <p>Hello... I'm a modal</p>
+      </div>
+    </div>
+
 
     
   </body>
