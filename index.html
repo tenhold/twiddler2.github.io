@@ -9,46 +9,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <script src="data-generator.js"></script>
+    <srcipt src="moment.js"></srcipt>
     <script src="index.js"></script>
     <link rel="stylesheet" href="index.css" type="text/css" />
 
   </head>
   <body> 
-    <header>
+    <div class='header'>
       <h1>Twiddler</h1>
-      <button type='button' form='new-tweet' id='get-new-tweet'>get that new</button>
-    </header>
-    <div class='twit-form'>
-      <form id='twit-form'>
-        <input id='twit' type='text' placeholder="twiddle it">
-        <button type='submit' form='twid-form' id='twit-it'>Twid it</button>
-      </form>
     </div>
-    <div id='to-home' href='.main'style='display:none'>To Home
-    
-    </div>
-    <div class='my-tweet'>
-    <!-- Storage for when the user tweets -->
-    </div>
-    <div class='main' id='main'>
-      <!-- Storage for tweets -->
-    </div>
-    
-    <div class='popup'>
-      <span class='popuptext' id='myPopup'>&times;</span>
-    </div>
+    <div class='container'>
+      <div class=left>
+        <p>                 </p>
 
-  
+      </div> 
+      <div class=center>
+          <div class='buttons'>
+          <form id='twit-form'>
+            <input id='twit' type='text' placeholder="twiddle it">
+            <button type='submit' form='twid-form' class='button'>Twid it</button>
+            <button type='button' form='new-tweet' class='button' id='get-new-tweet'>get that new</button>
 
-    <button id='modalBtn' class='button'>Click here</button>
+          </form>
+        </div>
+        
+        <a id='to-home' href='.main'style='display:none'>To Home</a>
+        <div id='home'>
+          <div class='main' id='main'>
+            <!-- Storage for tweets -->
+        </div>
+          </div>
+        
+        <div class='popup'>
+          <span class='popuptext' id='myPopup'>&times;</span>
+        </div>  
 
-    <div id='simpleModal' class='modal'>
-      <div class='modal-content'>
-        <span class='closeBtn'>&times;</span>
-        <p>Hello... I'm a modal</p>
+          <div id='simpleModal' class='modal'>
+            <div class='modal-content'>
+              <span class='closeBtn'>&times;</span>
+              <p>Hello... I'm a modal</p>
+            </div>
+          </div>
+
       </div>
+
+      <div class='right'>
+        <p>              </p>
+      </div
+
     </div>
 
+    <div class='footer'>
+
+
+    </div>
 
     
   </body>

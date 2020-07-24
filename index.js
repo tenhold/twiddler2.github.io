@@ -1,6 +1,7 @@
 // const moment = require("moment");
 
 
+
 const makeTweet = function(me) {
 
 
@@ -53,6 +54,7 @@ function getTweets() {
       .text(tweet.message);
     const $time = $(document.createElement('div'))
       .addClass('time')
+      .attr('id', 'time')
       .text(time)
     $tweet.append($user, $message, $time);
     $tweet.prependTo($('.main'));
@@ -62,6 +64,30 @@ function getTweets() {
   return $tweets
 };
 
+const $tweet = $('.tweet');
+
+
+////////////////////////////////////////////////////////////////////////////
+//                   get current time on tweets                          //
+///////////////////////////////////////////////////////////////////////////
+
+
+// setInterval(function() {
+//   $tweet.each(function() {
+//     let newTime = this.dataset.date;
+//     newTime = moment().diff(newTime)
+//     $(this).find('.tweet-date').text(newTime);
+//   })  
+  
+// }, 2000);
+
+////////////////////////////////////////////////////////////////////////////
+//                   generate random tweets with click                    //
+///////////////////////////////////////////////////////////////////////////
+
+$('#get-new-tweet').on('click', function() {    
+  getTweets();
+})
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -69,56 +95,156 @@ function getTweets() {
 ///////////////////////////////////////////////////////////////////////////
 
 
-// get modal element
-
-const modal = document.getElementById('simpleModal');
-
-// get open modal button
-
-// const modalBtn = document.getElementById('modalBtn');
-
-const modalBtn = document.getElementsByClassName('user');
-
-
-
-// close btn
-
-const closeBtn = document.getElementsByClassName('closeBtn')[0];
-
-// listen for click
-
-for (let i = 0; i < modalBtn.length; i++) {
-  modalBtn[i].addEventListener('click', openModal);
+function filterTweets(user) {
+  if(user) {
+    $('.tweet').show();
+  } else {
+    $('.tweet').hide();
+    // $('.tweet').filter(user[0].innerHTML.slice(1)).show();
+  } 
+  $('#home').show();
 }
 
-// listen for close click
-
-closeBtn.addEventListener('click', closeModal);
-
-// listen for outside click
-
-window.addEventListener('click', clickOutside);
-
-// function to open modal
 
 
-function openModal() {
-  modal.style.display = 'block'
-}
 
-// function to close modal
 
-function closeModal() {
-  modal.style.display = 'none';
-}
 
-// function to close modal
+$('body').on('click', '.user', function() {
+  // store the current name that is clicked
+  // const $clickedName = $(this)[0].dataset.user;
+  // const $clickedName = $(this).data('user');
 
-function clickOutside(e) {
-  if(e.target === modal) {
-    modal.style.display = 'none';
-  }
-}
+  var curUser = $(this).data("user"); //"this" refers to <a> selector, data(key): get data named "value"
+  $body.html(''); //html('')is used to set an element's content, any content that was in that element is completely replaced by the new content.
+  var $twiddUser = $(`<header><h1>Twiddler - ${curUser}</h1></header>`).addClass('tweet');
+  $twiddUser.appendTo($body);
+  var $home = $('<div class="home"><a href="index.html">Main Page</a></div>').addClass('twit-form');
+  $home.appendTo($body);
+  
+  const arrOfCurUser = streams.users[curUser].map((tweet, i) => {
+    console.log($clickedName)
+
+
+
+
+
+
+
+
+
+  })
+
+  // var userIndex = streams.users[curUser].length - 1;
+  // while (userIndex >= 0) {
+  //   var userTweet = streams.users[curUser][userIndex];
+  //   var $main = $('<section class="main"></section>');
+  //   $main.appendTo($body)
+  //   var $tweet = $('<div class="tweet"></div>');
+  //   $tweet.text(userTweet.message);
+  //   $tweet.appendTo($main);
+  //   var $timestamp = $('<div class="timestamp"></div>');
+  //   $timestamp.text(userTweet.created_at);
+  //   $timestamp.appendTo($main);
+  //   var $user = $('<a class="user" data-value="' + userTweet.user + '"></a>');
+  //   $user.text('@' + userTweet.user + ': ');
+  //   $user.prependTo($main);
+  //   userIndex -= 1;
+  //   }
+  });
+
+
+
+
+
+
+
+
+
+
+  // // getting the array of the tweets of the clicked name
+  // const arrOfClickedName = streams.users[$clickedName]
+
+  // console.log(arrOfClickedName)
+  // arrOfClickedName.forEach(function(tweet) {
+
+  // })  
+ 
+
+
+  // let user = $(this).closest('.tweet').data('user');
+  // // $('.main').hide();
+  // // filterTweets(user);
+//   return false;
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // get modal element
+
+// const modal = document.getElementById('simpleModal');
+
+// // get open modal button
+
+// // const modalBtn = document.getElementById('modalBtn');
+
+// const modalBtn = document.getElementsByClassName('user');
+
+
+// // close btn
+
+// const closeBtn = document.getElementsByClassName('closeBtn')[0];
+
+// // listen for click
+
+// for (let i = 0; i < modalBtn.length; i++) {
+//   modalBtn[i].addEventListener('click', function() {
+//     const name = $(this).data('user');
+//     $('.modal').dialog('option',)
+    
+    
+    
+//     modal.style.display = 'block';
+//   });
+// }
+
+// // listen for close click
+
+// closeBtn.addEventListener('click', closeModal);
+
+// // listen for outside click
+
+// window.addEventListener('click', clickOutside);
+
+// // function to open modal
+
+// function openModal() {
+//   modal.style.display = 'block';
+// }
+
+// // function to close modal
+
+// function closeModal() {
+//   modal.style.display = 'none';
+// }
+
+// // function to close modal
+
+// function clickOutside(e) {
+//   if(e.target === modal) {
+//     modal.style.display = 'none';
+//   }
+// }
 
 
 
@@ -207,16 +333,7 @@ function clickOutside(e) {
   
 
 
-  
-////////////////////////////////////////////////////////////////////////////
-//                   generate random tweets with click                    //
-///////////////////////////////////////////////////////////////////////////
 
-  $('#get-new-tweet').on('click', function() {    
-    console.log(modalBtn)
- 
-    getTweets();
-  })
 
 
 /////////////////////////////////////////////////////////////////////
