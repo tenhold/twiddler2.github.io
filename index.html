@@ -25,13 +25,9 @@
       </div> 
       <div class=center>
           <div class='buttons'>
-          <form id='twit-form'>
-            <button type='button' form='to-home' style='display:none' href='#main' class='button' id='to-home'>To Home</button> </br>
-            <input id='twit' type='text' placeholder="twiddle it">
-            <button type='submit' form='twid-form' class='button'>Twid it</button>
-            <button type='button' form='new-tweet' class='button' id='get-new-tweet'>get new</button>
+          <button type='button' form='to-home' style='display:none' href='#main' class='button' id='to-home'>To Home</button> </br>
+          <button type='button' form='new-tweet' class='button' id='get-new-tweet'>get new</button>
 
-          </form>
         </div>
         
         <div id='home'>
@@ -54,7 +50,11 @@
       </div>
 
       <div class='right'>
-        <p>              </p>
+        <form id='twit-form'>
+          <input id='user-name' type='text' placeholder="user name">
+          <input id='twit' type='text' placeholder="twiddle it">
+          <button type='submit' form='twid-form' class='button' id='twit-it'>Twid it</button>
+        </form>
       </div>
 
     </div>
