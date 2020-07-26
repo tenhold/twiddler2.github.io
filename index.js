@@ -86,7 +86,6 @@ $('#get-new-tweet').on('click', function() {
 $('body').on('click', '.user', function() {
   // store the current name that is clicked
   const $clickedName = $(this).data('user');
-  
   const $filteredTweets = $('.tweet').filter((i, tweet) => {
     const $userName = $(tweet)[0].id;
     if ($userName !== $clickedName) {
