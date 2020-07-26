@@ -74,12 +74,15 @@ const writeTweet = (message) => {
     throw new Error('Set the global visitor property!');
   }
 
-  streams.users[visitor] = [];
+  if (!streams.users[visitor]) {
+    streams.users[visitor] = [];
+  }
 
   const tweet = {
     user: visitor,
     message: message,
     created_at: new Date()
   };
-  addTweet(tweet);
+  console.log('visitor data-generator', tweet)
+  addTweet(tweet.message);
 };

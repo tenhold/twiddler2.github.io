@@ -130,10 +130,16 @@ $('body').on('click', '.user', function() {
 
 
 $('#twit-it').on('click', function() {
-  // const tweet = $(this).closest('input').val()
   window.visitor = $('#user-name').val();
   const $newUser = $('#user-name').val();
   const $newTweet = $('#twit').val();
+
+  const newUser = {
+    user: visitor,
+    message: [$newTweet],
+    created_at: new Date()
+  };
+
   if ($newUser.length && $newTweet.length) {
     const $tweet = $(document.createElement('div'))
       .addClass('tweet')
@@ -156,16 +162,12 @@ $('#twit-it').on('click', function() {
     $tweet.append($user, $message, $time);
     $tweet.prependTo($('.main'));
 
-    writeTweet($tweet);
+    console.log('user message index.js',newUser.message)
+    writeTweet(newUser);
   }
   $('#user-name').val('');
   $('#twit').val('');
 
-  // const newUser = {
-  //   user: visitor,
-  //   message: [$newTweet],
-  //   created_at: new Date()
-  // };
 });
 
 

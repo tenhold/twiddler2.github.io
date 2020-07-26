@@ -56,13 +56,24 @@
 
 .tweet :hover {
   border: none;
-
 }
-.form {
+ #twit-it {
+  display: inline;
+ }
 
-  background-color: coral;
+input, #twit-form #user-name #twit{
+  height: 100px;
+  font-size: 1.5em;
+  border: none;
+  border-bottom: solid;
+  border-color: #6886c5;
+  color: #6886c5;
 }
 
+::placeholder {
+  color: #6886c5;
+  opacity: 50%;
+}
 
 
 #user-home {
