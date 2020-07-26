@@ -8,6 +8,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.10.2/underscore-min.js"></script>
     <script src="data-generator.js"></script>
     <srcipt src="moment.js"></srcipt>
     <script src="index.js"></script>
@@ -16,45 +17,39 @@
   </head>
   <body> 
     <div class='header'>
-      <h1>Twiddler</h1>
-
+      <img src='images/twidder logo.png'>
+      <!-- <h1>Twiddler</h1> -->
     </div>
     <div class='container'>
       <div class=left>
-        <p>                 </p>
+        <p>                      </p>
       </div> 
       <div class=center>
           <div class='buttons'>
-          <button type='button' form='to-home' style='display:none' href='#main' class='button' id='to-home'>To Home</button> </br>
-          <button type='button' form='new-tweet' class='button' id='get-new-tweet'>get new</button>
+          <button type='button' form='new-tweet' class='button' id='get-new-tweet'>get new</button>           <button type='button' form='to-home' style='display:none' href='#main' class='button' id='to-home'>To Home</button> </br>
+
 
         </div>
         
         <div id='home'>
+          <div id='user-home' style='display:none'></div>
           <div class='main' id='main'>
             <!-- Storage for tweets -->
-        </div>
           </div>
-        
-        <div class='popup'>
-          <span class='popuptext' id='myPopup'>&times;</span>
-        </div>  
-<!-- 
-          <div id='simpleModal' class='modal'>
-            <div class='modal-content'>
-              <span class='closeBtn'>&times;</span>
-              <p>Hello... I'm a modal</p>
-            </div>
-          </div> -->
-
+        </div>
       </div>
 
       <div class='right'>
         <form id='twit-form'>
-          <input id='user-name' type='text' placeholder="user name">
-          <input id='twit' type='text' placeholder="twiddle it">
-          <button type='submit' form='twid-form' class='button' id='twit-it'>Twid it</button>
+          <div id='input'>
+            <input id='user-name' type='text' placeholder="user name">
+            <input id='twit' type='text' placeholder="twiddle it">
+          </div>
+          <div id='submit'>
+            <button type='button' class='button' id='twit-it'>Twid it</button>
+          </div>
         </form>
+
       </div>
 
     </div>
