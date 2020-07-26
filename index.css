@@ -103,6 +103,9 @@ input, #twit {
   font-size: 23px;
   font-weight: lighter;
 }
+a {
+  color: #6886c5;
+}
 
 a:hover {
   color: #ffacb7;
