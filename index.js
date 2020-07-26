@@ -20,15 +20,13 @@
 //   // return (tweets.append(h3).append(p)).prop('outerHTML');
 // }
 
-// const newUser = {
-//   user: 'jon',
-//   message: 'hello'
-// }
+const newUser = {
+  user: 'jon',
+  message: 'hello'
+}
 
-$(document).on('click', '#twit-it', function() {
-  const tweet = $(this).siblings('input')
-  console.log(tweet)
-})
+
+
 
 $(document).ready(() => {
   const $body = $('body');
@@ -158,6 +156,41 @@ $('body').on('click', '.user', function() {
 ////////////////////////////////////////////////////////////////////
 
 
+
+$('#twit-it').on('click', function() {
+  // const tweet = $(this).closest('input').val()
+  window.visitor = $('#user-name').val();
+  const $newUser = $('#user-name').val();
+  const $newTweet = $('#twit').val();
+
+  const $tweet = $(document.createElement('div'))
+    .addClass('tweet')
+    .attr('id', $newUser)
+    .attr('data-date', new Date());
+  const time = moment(new Date(), 'ddd mmm dd yyyy HH:MM:ss').fromNow(true);
+  const $user = $(document.createElement('a'))
+    .addClass('user')
+    .attr('id', 'user')
+    .attr('href', '#')
+    .attr('data-user', $newUser)
+    .text(`@${$newUser}`)
+  const $message = $(document.createElement('div'))
+    .addClass('message')
+    .text($newTweet);
+  const $time = $(document.createElement('div'))
+    .addClass('time')
+    .attr('id', 'time')
+    .text(`twidded ${time}`)
+  $tweet.append($user, $message, $time);
+  $tweet.prependTo($('.main'));
+
+  // const newUser = {
+  //   user: visitor,
+  //   message: [$newTweet],
+  //   created_at: new Date()
+  // };
+  // writeTweet($tweet);
+});
 
 
 
