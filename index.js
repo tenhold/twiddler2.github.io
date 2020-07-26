@@ -1,33 +1,5 @@
 // const moment = require("moment");
 
-
-
-// const makeTweet = function(me) {
-
-
-//   const $tweet = $(document.createElement('div'))
-//     .addClass('tweet')
-//     .attr('id', me.userName)
-//     .attr('data-date', tweet.created_at)
-//     .text(Date())
-//   const $name = $(document.createElement('a'))
-//     .text(me.userName);
-//   const $message = $(document.createElement('div'))
-//     .text(me.message);
-//   const $time = $(document.createElement('div'))
-//     .addClass('tweet')
-
-//   // return (tweets.append(h3).append(p)).prop('outerHTML');
-// }
-
-const newUser = {
-  user: 'jon',
-  message: 'hello'
-}
-
-
-
-
 $(document).ready(() => {
   const $body = $('body');
   const $mainDiv = $('.main');
@@ -87,7 +59,7 @@ function updateTweetTime(){
   });
 };
 
-setInterval(updateTweetTime, 30000);
+setInterval(updateTweetTime, 60000);
 
 ////////////////////////////////////////////////////////////////////////////
 //                   generate random tweets with click                    //
@@ -162,56 +134,42 @@ $('#twit-it').on('click', function() {
   window.visitor = $('#user-name').val();
   const $newUser = $('#user-name').val();
   const $newTweet = $('#twit').val();
+  if ($newUser.length && $newTweet.length) {
+    const $tweet = $(document.createElement('div'))
+      .addClass('tweet')
+      .attr('id', $newUser)
+      .attr('data-date', new Date());
+    const time = moment(new Date(), 'ddd mmm dd yyyy HH:MM:ss').fromNow(true);
+    const $user = $(document.createElement('a'))
+      .addClass('user')
+      .attr('id', 'user')
+      .attr('href', '#')
+      .attr('data-user', $newUser)
+      .text(`@${$newUser}`)
+    const $message = $(document.createElement('div'))
+      .addClass('message')
+      .text($newTweet);
+    const $time = $(document.createElement('div'))
+      .addClass('time')
+      .attr('id', 'time')
+      .text(`twidded ${time}`)
+    $tweet.append($user, $message, $time);
+    $tweet.prependTo($('.main'));
 
-  const $tweet = $(document.createElement('div'))
-    .addClass('tweet')
-    .attr('id', $newUser)
-    .attr('data-date', new Date());
-  const time = moment(new Date(), 'ddd mmm dd yyyy HH:MM:ss').fromNow(true);
-  const $user = $(document.createElement('a'))
-    .addClass('user')
-    .attr('id', 'user')
-    .attr('href', '#')
-    .attr('data-user', $newUser)
-    .text(`@${$newUser}`)
-  const $message = $(document.createElement('div'))
-    .addClass('message')
-    .text($newTweet);
-  const $time = $(document.createElement('div'))
-    .addClass('time')
-    .attr('id', 'time')
-    .text(`twidded ${time}`)
-  $tweet.append($user, $message, $time);
-  $tweet.prependTo($('.main'));
+    writeTweet($tweet);
+  }
+  $('#user-name').val('');
+  $('#twit').val('');
 
   // const newUser = {
   //   user: visitor,
   //   message: [$newTweet],
   //   created_at: new Date()
   // };
-  // writeTweet($tweet);
 });
 
 
 
-
-// on click run the fucntion to get input values that will add the 
-// new user and the tweet to the streams.users object
-  // $('#twit-it').on('click', function() {
-  //   const username = $(this).siblings('input').val();
-  //   const newTweet = $('#twit').val();
-
-  //   streams.users[username] = [];
-  //   streams.users
-  //   // addTweet(newTweet)
-
-  //   return false;
-  // })
-
-  // function getInputValue() {
-  //   const username = document.getElementById('user-name').value;
-  //   streams.users[newUser] = [newTweet];
-  // }
 
 
 });
