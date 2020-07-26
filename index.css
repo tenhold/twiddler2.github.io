@@ -70,6 +70,14 @@ input, #twit-form #user-name #twit{
   color: #6886c5;
 }
 
+input, #user-name {
+  width: 20%;
+}
+
+input, #twit {
+  width: 40%;
+}
+
 ::placeholder {
   color: #6886c5;
   opacity: 50%;
